@@ -14,7 +14,7 @@ import Url.Parser as Parser exposing (Parser, oneOf, s)
 type Route
     = Home
     | Root
-    | About
+    | Basket
     | Shop
 
 
@@ -27,7 +27,7 @@ parser : Parser (Route -> a) a
 parser =
     oneOf
         [ Parser.map Home Parser.top
-        , Parser.map About (s "about"),
+        , Parser.map Basket (s "basket"),
         Parser.map Shop (s "shop")
 
         --    When needing parameters on the form base/item/3
@@ -70,8 +70,8 @@ routeToString page =
                 Root ->
                     []
 
-                About ->
-                    [ "about" ]
+                Basket ->
+                    [ "basket" ]
 
                 Shop ->
                     [ "shop" ]

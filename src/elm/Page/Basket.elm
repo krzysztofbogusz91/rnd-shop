@@ -1,4 +1,4 @@
-module Page.About exposing (Model, Msg, init, subscriptions, toSession, update, view)
+module Page.Basket exposing (Model, Msg, init, subscriptions, toSession, update, view)
 
 import Html exposing (Html, div, h2, text)
 import Html.Attributes exposing (class)
@@ -19,8 +19,8 @@ type alias Model =
 init : Session -> ( Model, Cmd Msg )
 init session =
     ( { session = session
-      , pageTitle = "About"
-      , pageBody = "This is the about page"
+      , pageTitle = "Basket"
+      , pageBody = "This is basket"
       }
     , Cmd.none
     )

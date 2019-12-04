@@ -17,7 +17,7 @@ under Other.
 type Page
     = Other
     | Home
-    | About
+    | Basket
     | Shop
 
 
@@ -46,12 +46,12 @@ viewHeader page =
     nav [ class "navbar" ]
         [ div [ class "container" ]
             [ ul [ class "navbar-menu"]
-                  [ navbarLink page Route.About [ text "Home" ],
-                   navbarLink page Route.About [ text "Logout" ]
+                  [ navbarLink page Route.Home [ text "Home" ],
+                   navbarLink page Route.Shop [ text "Shop" ]
                   ]
             , ul [ class "navbar-menu" ]
-                [ navbarLink page Route.Home [ text "Search" ],
-                  navbarLink page Route.Home [ text "Checkout" ]
+                [ activeLink  [ ],
+                  navbarLink page Route.Basket [ text "Checkout" ]
                  ]
             ]
         ]
@@ -69,6 +69,10 @@ navbarLink page route linkContent =
     li [ classList [ ( "nav-item", True ), ( "active", isActive page route ) ] ]
         [ a [ class "nav-link", Route.href route ] linkContent ]
 
+activeLink : List (Html msg) -> Html msg
+activeLink linkContent =
+    li [ class "nav-item" ]
+        [ input [ class "nav-search" ] []]
 
 isActive : Page -> Route -> Bool
 isActive page route =
@@ -76,7 +80,7 @@ isActive page route =
         ( Home, Route.Home ) ->
             True
 
-        ( About, Route.About ) ->
+        ( Basket, Route.Basket ) ->
             True
 
         _ ->

@@ -5,7 +5,7 @@ import Browser.Navigation as Nav
 import Html exposing (..)
 import Json.Decode exposing (Value)
 import Page
-import Page.About as About
+import Page.Basket as Basket
 import Page.Shop as Shop
 import Page.Blank as Blank
 import Page.Home as Home
@@ -28,7 +28,7 @@ type Model
     = Redirect Session
     | NotFound Session
     | Home Home.Model
-    | About About.Model
+    | Basket Basket.Model
     | Shop Shop.Model
 
 
@@ -64,8 +64,8 @@ view model =
         Home home ->
             viewPage Page.Home GotHomeMsg (Home.view home)
 
-        About about ->
-            viewPage Page.About GotAboutMsg (About.view about)
+        Basket basket ->
+            viewPage Page.Basket GotBasketMsg (Basket.view basket)
 
         Shop shop ->
             viewPage Page.Shop GotShopMsg (Shop.view shop)
@@ -82,7 +82,7 @@ type Msg
     | ChangedUrl Url
     | ClickedLink Browser.UrlRequest
     | GotHomeMsg Home.Msg
-    | GotAboutMsg About.Msg
+    | GotBasketMsg Basket.Msg
     | GotShopMsg Shop.Msg
 
 
@@ -98,8 +98,8 @@ toSession page =
         Home home ->
             Home.toSession home
 
-        About about ->
-            About.toSession about
+        Basket basket ->
+            Basket.toSession basket
 
         Shop shop ->
             Shop.toSession shop
@@ -122,9 +122,9 @@ changeRouteTo maybeRoute model =
             Home.init session
                 |> updateWith Home GotHomeMsg model
 
-        Just Route.About ->
-            About.init session
-                |> updateWith About GotAboutMsg model
+        Just Route.Basket ->
+            Basket.init session
+                |> updateWith Basket GotBasketMsg model
 
         Just Route.Shop ->
             Shop.init session
@@ -173,9 +173,9 @@ update msg model =
             Home.update subMsg home
                 |> updateWith Home GotHomeMsg model
 
-        ( GotAboutMsg subMsg, About about ) ->
-            About.update subMsg about
-                |> updateWith About GotAboutMsg model
+        ( GotBasketMsg subMsg, Basket basket ) ->
+            Basket.update subMsg basket
+                |> updateWith Basket GotBasketMsg model
 
         ( GotShopMsg subMsg, Shop shop ) ->
             Shop.update subMsg shop
@@ -209,8 +209,8 @@ subscriptions model =
         Home home ->
             Sub.map GotHomeMsg (Home.subscriptions home)
 
-        About about ->
-            Sub.map GotAboutMsg (About.subscriptions about)
+        Basket basket ->
+            Sub.map GotBasketMsg (Basket.subscriptions basket)
 
         Shop shop ->
             Sub.map GotShopMsg (Shop.subscriptions shop)
