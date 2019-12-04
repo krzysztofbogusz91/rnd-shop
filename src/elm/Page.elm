@@ -18,6 +18,7 @@ type Page
     = Other
     | Home
     | About
+    | Shop
 
 
 {-| Take a page's Html and frames it with a header and footer.
@@ -42,31 +43,24 @@ view page { title, content } =
 
 viewHeader : Page -> Html msg
 viewHeader page =
-    nav [ class "navbar navbar-expand-lg navbar-light bg-light" ]
+    nav [ class "navbar" ]
         [ div [ class "container" ]
-            [ a [ class "navbar-brand", Route.href Route.Home ]
-                [ text "ElmSPA" ]
-            , ul [ class "nav navbar-nav pull-xs-right" ] <|
-                navbarLink page Route.Home [ text "Home" ]
-                    :: viewMenu page
+            [ ul [ class "navbar-menu"]
+                  [ navbarLink page Route.About [ text "Home" ],
+                   navbarLink page Route.About [ text "Logout" ]
+                  ]
+            , ul [ class "navbar-menu" ]
+                [ navbarLink page Route.Home [ text "Search" ],
+                  navbarLink page Route.Home [ text "Checkout" ]
+                 ]
             ]
         ]
-
-
-viewMenu : Page -> List (Html msg)
-viewMenu page =
-    let
-        linkTo =
-            navbarLink page
-    in
-    [ linkTo Route.About [ text "About" ]
-    ]
 
 
 viewFooter : Html msg
 viewFooter =
     footer []
-        [ div [] []
+        [ div [] [ text "this is footer"]
         ]
 
 

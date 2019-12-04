@@ -6,6 +6,7 @@ import Html exposing (..)
 import Json.Decode exposing (Value)
 import Page
 import Page.About as About
+import Page.Shop as Shop
 import Page.Blank as Blank
 import Page.Home as Home
 import Page.NotFound as NotFound
@@ -28,6 +29,7 @@ type Model
     | NotFound Session
     | Home Home.Model
     | About About.Model
+    | Shop Shop.Model
 
 
 init : Value -> Url -> Nav.Key -> ( Model, Cmd Msg )
@@ -65,6 +67,10 @@ view model =
         About about ->
             viewPage Page.About GotAboutMsg (About.view about)
 
+        Shop shop ->
+            viewPage Page.Shop GotShopMsg (Shop.view shop)
+
+
 
 
 -- UPDATE
@@ -77,6 +83,7 @@ type Msg
     | ClickedLink Browser.UrlRequest
     | GotHomeMsg Home.Msg
     | GotAboutMsg About.Msg
+    | GotShopMsg Shop.Msg
 
 
 toSession : Model -> Session
@@ -93,6 +100,9 @@ toSession page =
 
         About about ->
             About.toSession about
+
+        Shop shop ->
+            Shop.toSession shop
 
 
 changeRouteTo : Maybe Route -> Model -> ( Model, Cmd Msg )
@@ -115,6 +125,11 @@ changeRouteTo maybeRoute model =
         Just Route.About ->
             About.init session
                 |> updateWith About GotAboutMsg model
+
+        Just Route.Shop ->
+            Shop.init session
+                |> updateWith Shop GotShopMsg model
+
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -162,6 +177,10 @@ update msg model =
             About.update subMsg about
                 |> updateWith About GotAboutMsg model
 
+        ( GotShopMsg subMsg, Shop shop ) ->
+            Shop.update subMsg shop
+                |> updateWith Shop GotShopMsg model
+
         ( _, _ ) ->
             -- Disregard messages that arrived for the wrong page.
             ( model, Cmd.none )
@@ -192,6 +211,9 @@ subscriptions model =
 
         About about ->
             Sub.map GotAboutMsg (About.subscriptions about)
+
+        Shop shop ->
+            Sub.map GotShopMsg (Shop.subscriptions shop)
 
 
 

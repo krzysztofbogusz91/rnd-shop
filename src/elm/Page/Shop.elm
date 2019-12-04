@@ -1,8 +1,7 @@
-module Page.Home exposing (Model, Msg, init, subscriptions, toSession, update, view)
+module Page.Shop exposing (Model, Msg, init, subscriptions, toSession, update, view)
 
-import Html exposing (Html, button, div, h2, h5, hr, p, text)
+import Html exposing (Html, div, h2, text)
 import Html.Attributes exposing (class)
-import Html.Events exposing (onClick)
 import Session exposing (Session)
 
 
@@ -20,8 +19,8 @@ type alias Model =
 init : Session -> ( Model, Cmd Msg )
 init session =
     ( { session = session
-      , pageTitle = "Home"
-      , pageBody = "This is the home page of the fashion store"
+      , pageTitle = "Shop"
+      , pageBody = "This is the shop page"
       }
     , Cmd.none
     )
@@ -48,6 +47,7 @@ view model =
 
 type Msg
     = Todo
+
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =

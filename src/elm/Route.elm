@@ -15,6 +15,7 @@ type Route
     = Home
     | Root
     | About
+    | Shop
 
 
 
@@ -26,7 +27,8 @@ parser : Parser (Route -> a) a
 parser =
     oneOf
         [ Parser.map Home Parser.top
-        , Parser.map About (s "about")
+        , Parser.map About (s "about"),
+        Parser.map Shop (s "shop")
 
         --    When needing parameters on the form base/item/3
         --    , Parser.map Item (s "item" </> string)
@@ -70,6 +72,9 @@ routeToString page =
 
                 About ->
                     [ "about" ]
+
+                Shop ->
+                    [ "shop" ]
 
         --    When needing parameters on the form base/item/3
         --                    Item id ->
