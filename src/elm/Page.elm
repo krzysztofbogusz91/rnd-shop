@@ -44,12 +44,12 @@ view page { title, content } =
 viewHeader : Page -> Html msg
 viewHeader page =
     nav [ class "navbar" ]
-        [ div [ class "container" ]
-            [ ul [ class "navbar-menu"]
+        [ div [ class "navbar__container" ]
+            [ ul [ class "navbar-menu navbar-menu--left"]
                   [ navbarLink page Route.Home [ text "Home" ],
                    navbarLink page Route.Shop [ text "Shop" ]
                   ]
-            , ul [ class "navbar-menu" ]
+            , ul [ class "navbar-menu navbar-menu--right" ]
                 [ activeLink  [ ],
                   navbarLink page Route.Basket [ text "Checkout" ]
                  ]
@@ -67,12 +67,12 @@ viewFooter =
 navbarLink : Page -> Route -> List (Html msg) -> Html msg
 navbarLink page route linkContent =
     li [ classList [ ( "nav-item", True ), ( "active", isActive page route ) ] ]
-        [ a [ class "nav-link", Route.href route ] linkContent ]
+        [ a [ class "nav-item--link", Route.href route ] linkContent ]
 
 activeLink : List (Html msg) -> Html msg
 activeLink linkContent =
     li [ class "nav-item" ]
-        [ input [ class "nav-search" ] []]
+        [ input [ class "nav-item--search" ] []]
 
 isActive : Page -> Route -> Bool
 isActive page route =

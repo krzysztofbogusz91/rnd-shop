@@ -1,4 +1,11 @@
+@import './utils/colors.scss';
+@import './components//navbar.scss';
+
+* {
+  margin: 0;
+  padding: 0;
+}
 
 body {
-  background-color: beige;
+  background-color: $basic-color;
 }
