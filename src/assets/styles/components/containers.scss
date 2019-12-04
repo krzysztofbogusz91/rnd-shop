@@ -1,3 +1,20 @@
-.container {
-  background-color: beige;
+.page-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.navbar {
+  height: 80px;
+  justify-self: flex-start;
+}
+
+.content-container{
+  height: 100%;
+}
+
+.footer{
+  height: 100px;
+  justify-self: flex-end;
 }

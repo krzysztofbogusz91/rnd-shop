@@ -34,10 +34,10 @@ view : Page -> { title : String, content : Html msg } -> Document msg
 view page { title, content } =
     { title = title ++ " - Elm SPA"
     , body =
-        [ viewHeader page
-        , content
+       [ div [class "page-container"] [ viewHeader page
+        , div [class "content-container" ][ content]
         , viewFooter
-        ]
+        ]]
     }
 
 
@@ -59,7 +59,7 @@ viewHeader page =
 
 viewFooter : Html msg
 viewFooter =
-    footer []
+    footer [class "footer"]
         [ div [] [ text "this is footer"]
         ]
 
