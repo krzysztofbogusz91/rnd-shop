@@ -1,6 +1,6 @@
 module Page.Shop exposing (Model, Msg, init, subscriptions, toSession, update, view)
 
-import Html exposing (Html, div, h2, text)
+import Html exposing (Html, div, h2, h4, ul, li, text)
 import Html.Attributes exposing (class)
 import Session exposing (Session)
 
@@ -12,15 +12,14 @@ import Session exposing (Session)
 type alias Model =
     { session : Session
     , pageTitle : String
-    , pageBody : String
+    , pageBody : Html Msg
     }
-
 
 init : Session -> ( Model, Cmd Msg )
 init session =
     ( { session = session
       , pageTitle = "Shop"
-      , pageBody = "This is the shop page"
+      , pageBody = viewBody
       }
     , Cmd.none
     )
@@ -36,11 +35,22 @@ view model =
     , content =
         div [ class "container" ]
             [ h2 [] [ text model.pageTitle ]
-            , div [] [ text model.pageBody ]
+            , div [] [ model.pageBody ]
             ]
     }
 
+viewBody : Html msg
+viewBody =
+    div [class "shop-container"]
+       [ 
+        div [class "shop-filters"] [ h4 [] [ text "Shop Filters"]],    
+        div [class "shop-list"] [ h4 [] [ text "Shop Items"], viewShopList ]
+        ]
 
+viewShopList : Html msg
+viewShopList =
+    div [class "shop-list-list"]
+       [ ul [class "list"] [li [class "list-item"][text "item 1"]] ]
 
 -- UPDATE
 

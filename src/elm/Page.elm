@@ -63,7 +63,6 @@ viewFooter =
         [ div [] [ text "this is footer"]
         ]
 
-
 navbarLink : Page -> Route -> List (Html msg) -> Html msg
 navbarLink page route linkContent =
     li [ classList [ ( "nav-item", True ), ( "active", isActive page route ) ] ]
